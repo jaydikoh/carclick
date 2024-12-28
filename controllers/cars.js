@@ -7,8 +7,9 @@ const ensureSignedIn = require('../middleware/ensure-signed-in');
 // All routes start with '/cars'
 
 // GET /cars (index functionality) UN-PROTECTED - all users can access
-router.get('/', (req, res) => {
-  res.render('cars/index.ejs', {title: 'All Cars'});
+router.get('/', async (req, res) => {
+  const cars = await Car.find({}).populate('owner')
+  res.render('cars/index.ejs', {title: 'All Cars', cars});
 });
 
 // GET /cars/new (new functionality) PROTECTED - only signed in users can access
