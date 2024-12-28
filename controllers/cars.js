@@ -8,12 +8,12 @@ const ensureSignedIn = require('../middleware/ensure-signed-in');
 
 // GET /cars (index functionality) UN-PROTECTED - all users can access
 router.get('/', (req, res) => {
-  res.send('Rejoice - the cars are here!');
+  res.render('cars/index.ejs', {title: 'All Cars'});
 });
 
 // GET /cars/new (new functionality) PROTECTED - only signed in users can access
 router.get('/new', ensureSignedIn, (req, res) => {
-  res.send('Add a car!');
+  res.render('cars/new.ejs', {title: 'Add Cars'});
 });
 
 

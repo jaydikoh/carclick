@@ -10,10 +10,10 @@
     <nav>
       <a href="/">🏠</a>
       <div>
-        <a href="/unicorns">ALL UNICORNS</a>
+        <a href="/cars">ALL CARS</a>
         <!-- Above renders whether signed in or not -->
         <% if (user) { %>
-        <a href="/unicorns/new">ADD UNICORN</a>
+        <a href="/cars/new">ADD CAR</a>
         <a href="/auth/sign-out">SIGN OUT</a>
         <span><%= user.username %></span>
         <% } else { %>

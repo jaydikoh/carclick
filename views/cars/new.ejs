@@ -1,0 +1,28 @@
+<%- include('../partials/header.ejs') %>
+
+<form action="/cars" method="POST">
+    <label for="name">Car Model:</label>
+    <input type="text" name="name" id="name" />
+    <label for="type">Type of Car:</label>
+            <select required>
+                <option>Sedan</option>
+                <option>Coupe</option>
+                <option>Suv</option>
+                <option>Truck</option>
+                <option>Electric</option>
+                <option>Convertible</option>
+            </select>
+    <label for="city">City:</label>
+    <input type="text" name="city" id="city" />
+    <label for="price">Price:$</label>
+    <input type="number" name="price" id="price" min="0" />
+    <label for="year">Year:</label>
+    <input type="number" name="year" id="year" min="1950" max="2024" maxlength="4" required>
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="number" name="phoneNumber" id="phoneNumber" />
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" />
+    <button type="submit">Add Car</button>
+  </form>
+
+<%- include('../partials/footer.ejs') %>

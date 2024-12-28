@@ -18,10 +18,19 @@ const carSchema = new Schema({
     year: {
       type: Number,
       required: true,
+      max: new Date().getFullYear(),
     },
     city: {
         type: String,
         required: true,
+    },
+    phoneNumber: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
     },
     owner: {
         type: Schema.Types.ObjectId,
