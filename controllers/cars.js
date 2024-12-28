@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const Car = require('../models/car');
 // Middleware to protect selected routes
 const ensureSignedIn = require('../middleware/ensure-signed-in');
 
@@ -15,6 +15,19 @@ router.get('/', (req, res) => {
 router.get('/new', ensureSignedIn, (req, res) => {
   res.render('cars/new.ejs', {title: 'Add Cars'});
 });
+
+// POST /cars  (Create functionality)
+router.post ('/', ensureSignedIn, async (req, res) => {
+  try{
+    req.body.owner = req.user._id
+    const car = await Car.create(req.body);
+    console.log(car)
+    res.redirect('/cars');
+  } catch (e) {
+    console.log(e);
+    res.redirect('/cars/new');
+  }
+})
 
 
 
