@@ -3,8 +3,8 @@
 <ul>
   <% cars.forEach((car) => { %>
   <li>
-    <a href="/cars/<%= car._id %>"
-      >A Car in <%= car.city %> owned by <%= car.owner.username
+    <a href="/cars/<%= car._id %>">
+        A Car in <%= car.city %> owned by <%= car.owner.username
       %>.</a>
   </li>
   <% }) %>

@@ -1,0 +1,16 @@
+<%- include('../partials/header.ejs') %>
+
+<h2>Details</h2>
+<p>Car Model: <%= car.name %></p>
+<p>Year: <%= car.year %></p>
+<p>Car Type: <%= car.type %></p>
+<p>Price: $<%= car.price %></p>
+<p>Location: <%= car.city %></p>
+<p>Added on: <%= car.createdAt.toLocaleDateString() %></p>
+<h2>Owner</h2>
+<% if (car.owner?._id.equals(user?._id)) { %>
+<p>You own this!</p>
+<% } else { %>
+<p>You don't own this, <%= car.owner.username %> does!</p>
+    <% } %>
+<%- include('../partials/footer.ejs')%>
