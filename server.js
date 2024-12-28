@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 // defined in the router module
 app.use('/auth', require('./controllers/auth'));
 
-app.use('/unicorns', require('./controllers/unicorns'));
+app.use('/cars', require('./controllers/cars'));
 
 // Any requests that get this far must have a signed in 
 // user thanks to ensureSignedIn middleware
