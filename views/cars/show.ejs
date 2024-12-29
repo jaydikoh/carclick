@@ -13,4 +13,12 @@
 <% } else { %>
 <p>You don't own this, <%= car.owner.username %> does!</p>
     <% } %>
+
+<% if (isFavorited) { %>
+<p>This Car is favorited</p>
+<% } else if (user) { %>
+    <form action="/cars/<%= car._id %>/favorites" method="POST">
+        <button type="submit">Add to Favorites</button>
+          </form>   
+<% } %>    
 <%- include('../partials/footer.ejs')%>

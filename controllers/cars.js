@@ -12,16 +12,18 @@ router.get('/', async (req, res) => {
   res.render('cars/index.ejs', {title: 'All Cars', cars});
 });
 
-// GET /cars/:id (show funtionality)
-router.get('/:id', async (req, res) => {
-  const car =  await Car.findById(req.params.id).populate('owner');
-  res.render('cars/show.ejs', {title: `Car in ${car.city}`, car})
-});
-
 // GET /cars/new (new functionality) PROTECTED - only signed in users can access
 router.get('/new', ensureSignedIn, (req, res) => {
   res.render('cars/new.ejs', {title: 'Add Cars'});
 });
+
+// GET /cars/:id (show funtionality)
+router.get('/:id', async (req, res) => {
+  const car =  await Car.findById(req.params.id).populate('owner');
+  const isFavorited = car.favoritedBy.some((userId) => userId.equals(req.user._id));
+  res.render('cars/show.ejs', {title: `Car in ${car.city}`, car, isFavorited})
+});
+
 
 // POST /cars  (Create functionality)
 router.post ('/', ensureSignedIn, async (req, res) => {

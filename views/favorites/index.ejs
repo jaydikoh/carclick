@@ -6,7 +6,11 @@
     <a href="/cars/<%= car._id %>">
         A Car in <%= car.city %> owned by <%= car.owner.username
       %>.</a>
+      <form action="/cars/<%= car._id %>/favorites?_method=DELETE" method="POST">
+        <button type="submit">Remove from Favorites</button>
+          </form>
   </li>
+  
   <% }) %>
 </ul>
 

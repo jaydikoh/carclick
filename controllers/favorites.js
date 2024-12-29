@@ -6,7 +6,7 @@ const Car = require('../models/car');
 // All routes start with '/'
 
 // GET /cars (index functionality) 
-router.get('/favourites', async (req, res) => {
+router.get('/favorites', async (req, res) => {
   const cars = await Car.find({favoritedBy: req.user._id}).populate('owner')
   res.render('favorites/index.ejs', {title: 'Favorite Cars', cars});
 });
@@ -18,18 +18,33 @@ router.get('/:id', async (req, res) => {
 });
 
 
-// POST /cars  (Create functionality)
-// router.post ('/', ensureSignedIn, async (req, res) => {
-//   try{
-//     req.body.owner = req.user._id
-//     const car = await Car.create(req.body);
-//     console.log(car)
-//     res.redirect('/cars');
-//   } catch (e) {
-//     console.log(e);
-//     res.redirect('/cars/new');
-//   }
-// })
+// POST /cars/:id/favourites  (Create functionality)
+router.post ('/cars/:id/favorites', async (req, res) => {
+  try{
+    await Car.findByIdAndUpdate(
+      req.params.id,
+      {$addToSet: {favoritedBy: req.user._id}}
+    );
+    res.redirect(`/cars/${req.params.id}`);
+  } catch (e) {
+    console.log(e);
+    res.redirect('/cars');
+  }
+})
+
+// DELETE /cars/:id/favorites (delete favorites functionality)
+router.delete('/cars/:id/favorites', async (req, res) => {
+  try{
+    await Car.findByIdAndUpdate(
+      req.params.id,
+      {$pull: {favoritedBy: req.user._id}}
+    );
+    res.redirect(`/cars/${req.params.id}`);
+  } catch (e) {
+    console.log(e);
+    res.redirect('/cars');
+  }
+});
 
 
 
