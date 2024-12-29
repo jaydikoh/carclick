@@ -1,0 +1,13 @@
+<%- include('../partials/header.ejs') %>
+
+<ul>
+  <% cars.forEach((car) => { %>
+  <li>
+    <a href="/cars/<%= car._id %>">
+        A Car in <%= car.city %> owned by <%= car.owner.username
+      %>.</a>
+  </li>
+  <% }) %>
+</ul>
+
+<%- include('../partials/footer.ejs')%>
