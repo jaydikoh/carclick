@@ -1,0 +1,28 @@
+<%- include('../partials/header.ejs') %>
+
+<form action="/cars/<%=car._id%>?_method=PUT" method="POST">
+    <label for="name">Car Model:</label>
+    <input type="text" name="name" id="name" value="<%= car.name %>" />
+    <label for="type">Type of Car:</label>
+            <select name="type" id="type"required>
+                <option>Sedan</option>
+                <option>Coupe</option>
+                <option>Suv</option>
+                <option>Truck</option>
+                <option>Electric</option>
+                <option>Convertible</option>
+            </select>
+    <label for="city">City:</label>
+    <input type="text" name="city" id="city"  value="<%= car.city %>"  />
+    <label for="price">Price:$</label>
+    <input type="number" name="price" id="price" min="0"  value="<%= car.price %>" />
+    <label for="year">Year:</label>
+    <input type="number" name="year" id="year" min="1950" max="2024" maxlength="4" required  value="<%= car.year %>" >
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="number" name="phoneNumber" id="phoneNumber"  value="<%= car.phoneNumber %>" />
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email"  value="<%= car.email %>" />
+    <button type="submit">Edit Car</button>
+  </form>
+
+<%- include('../partials/footer.ejs') %>

@@ -10,6 +10,9 @@
 <h2>Owner</h2>
 <% if (car.owner?._id.equals(user?._id)) { %>
 <p>You own this!</p>
+<a href="/cars/<%= car._id %>/edit">Edit Car</a>
+<form action="/cars/<%= car._id %>?_method=DELETE" method="POST">
+    <button type="submit">Delete Car</button>
 <% } else { %>
 <p>You don't own this, <%= car.owner.username %> does!</p>
     <% } %>

@@ -8,11 +8,13 @@ body {
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  background-color: black;
+  color: aliceblue;
 }
 
 nav,
 footer {
-  background-color: lightblue;
+  background-color: rgb(40, 40, 40);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,9 +26,10 @@ footer {
 nav a {
   text-decoration: none;
   color: slategray;
-  background-color: white;
+  background-color: rgb(210, 200, 200);
   padding: 1vmin;
   border-radius: 1vmin;
+  
 
   &:hover {
     color: gray;
