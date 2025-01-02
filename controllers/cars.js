@@ -1,6 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const Car = require('../models/car');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'uploads/'); // Save files to the 'uploads' directory
+  },
+  filename: (req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`); // Add timestamp to file name
+  }
+});
+
+const upload = multer({ storage });
+
 // Middleware to protect selected routes
 const ensureSignedIn = require('../middleware/ensure-signed-in');
 
@@ -19,18 +35,20 @@ router.get('/new', ensureSignedIn, (req, res) => {
 
 // GET /cars/:id (show funtionality)
 router.get('/:id', async (req, res) => {
-  const car =  await Car.findById(req.params.id).populate('owner');
+  const car = await Car.findById(req.params.id).populate('owner');
   const isFavorited = car.favoritedBy.some((userId) => userId.equals(req.user?._id));
   res.render('cars/show.ejs', {title: `Car in ${car.city}`, car, isFavorited})
 });
 
 
 // POST /cars  (Create functionality)
-router.post('/', ensureSignedIn, async (req, res) => {
+router.post('/', ensureSignedIn, upload.single('photo'), async (req, res) => {
   try{
-    req.body.owner = req.user._id
+    req.body.owner = req.user._id;
+    if (req.file) {
+      req.body.photo = `/uploads/${req.file.filename}`; // Store file path in photo field
+  }
     const car = await Car.create(req.body);
-    console.log(car)
     res.redirect('/cars');
   } catch (e) {
     console.log(e);
@@ -49,7 +67,7 @@ router.get('/:id/edit', async (req, res) => {
 router.put('/:id', ensureSignedIn, async(req, res) => {
   try{
     req.body.owner = req.user._id
-    await Car.findByIdAndUpdate(req.params.id, req.body);    console.log(car)
+    await Car.findByIdAndUpdate(req.params.id, req.body);  
     res.redirect('/cars');
   } catch (e) {
     console.log(e);
@@ -59,8 +77,26 @@ router.put('/:id', ensureSignedIn, async(req, res) => {
 
 // DELETE /cars/:id/delete (Delete functionality)
 router.delete('/:id', ensureSignedIn, async (req, res) => {
-  await Car.findByIdAndDelete(req.params.id)
-  res.redirect('/cars')
+  try {
+    const car = await Car.findById(req.params.id);
+
+    if (car.photo) {
+      const filePath = path.join(__dirname, '../', car.photo); // Adjust the path as necessary
+      fs.unlink(filePath, (err) => {
+          if (err) {
+              console.error('Error deleting photo:', err);
+          } else {
+              console.log('Photo deleted successfully');
+          }
+      });
+  }
+      
+      await Car.findByIdAndDelete(req.params.id)
+      res.redirect('/cars');
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Error deleting car');
+  }
 });
 
 

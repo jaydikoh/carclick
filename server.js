@@ -44,7 +44,7 @@ app.use(require('./middleware/add-user-to-locals-and-req'));
 
 // GET /  (home page functionality)
 app.get('/', (req, res) => {
-  res.render('home.ejs', { title: 'Home Page' });
+  res.render('home.ejs');
 });
 
 // '/auth' is the "starts with" path that the request must match
@@ -60,6 +60,8 @@ app.use(require('./middleware/ensure-signed-in'));
 // Any controller/routes mounted below here will have
 // ALL routes protected by the ensureSignedIn middleware
 app.use('/', require('./controllers/favorites'));
+
+app.use('/uploads', express.static('uploads'));
 
 
 

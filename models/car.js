@@ -20,6 +20,10 @@ const carSchema = new Schema({
       required: true,
       max: new Date().getFullYear(),
     },
+    photo: {
+      type: String,
+      required: true
+    },
     city: {
         type: String,
         required: true,
@@ -46,3 +50,4 @@ const carSchema = new Schema({
 });
 
 module.exports = mongoose.model('Car', carSchema);
+

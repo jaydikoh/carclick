@@ -12,8 +12,7 @@ body {
   color: aliceblue;
 }
 
-nav,
-footer {
+nav {
   background-color: rgb(40, 40, 40);
   display: flex;
   justify-content: space-between;
@@ -21,6 +20,7 @@ footer {
   padding: 2vmin;
   font-size: 2vh;
   color: lightslategray;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 nav a {
@@ -42,6 +42,98 @@ nav span {
   font-size: 1.5vmin;
   color: lightslategray;
 }
+
+.container1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 10%;
+  background: rgb(40, 40, 40) no-repeat center/cover;
+  color: #fff;
+}
+
+.section {
+  max-width: 50%;
+}
+
+.container1 h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.container1 p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  color: #141e30;
+  background-color: #f0f0f0;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container1 img {
+  max-width: 40%;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.features {
+  text-align: center;
+  padding: 3rem 10%;
+  background: #0b0d0d;
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.feature-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.feature {
+  background: #1b2735;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 30%;
+  min-width: 250px;
+}
+
+.feature h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.about {
+  padding: 3rem 10%;
+  background: rgb(40, 40, 40);
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+footer {
+  background: #1b2735;
+  text-align: center;
+  padding: 1rem 0;
+  color: #f0f0f0;
+  margin-top: auto;
+}
+
+
 
 main {
   display: flex;
@@ -76,3 +168,4 @@ button:hover {
   background-color: lightslategray;
   color: white;
 }
+

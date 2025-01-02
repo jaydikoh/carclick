@@ -1,6 +1,12 @@
 <%- include('../partials/header.ejs') %>
 
 <h2>Details</h2>
+<% if (car.photo) { %>
+    <img src="<%= car.photo %>" alt="<%= car.name %>" />
+<% } else { %>
+    <p>No photo available</p>
+<% } %>
+
 <p>Car Model: <%= car.name %></p>
 <p>Year: <%= car.year %></p>
 <p>Car Type: <%= car.type %></p>

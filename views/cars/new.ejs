@@ -1,6 +1,6 @@
 <%- include('../partials/header.ejs') %>
 
-<form action="/cars" method="POST">
+<form action="/cars" method="POST" enctype="multipart/form-data">
     <label for="name">Car Model:</label>
     <input type="text" name="name" id="name" />
     <label for="type">Type of Car:</label>
@@ -22,6 +22,8 @@
     <input type="number" name="phoneNumber" id="phoneNumber" />
     <label for="email">Email:</label>
     <input type="email" name="email" id="email" />
+    <label for="photo">Car Photo:</label>
+    <input type="file" name="photo" id="photo" accept="image/*" />
     <button type="submit">Add Car</button>
   </form>
 
