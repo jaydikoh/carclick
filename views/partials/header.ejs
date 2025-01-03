@@ -10,9 +10,9 @@
     <nav>
       <a href="/">HOME</a>
       <div>
-        <a href="/cars">MY CARS</a>
         <!-- Above renders whether signed in or not -->
         <% if (user) { %>
+        <a href="/cars/mycars">MY CARS</a>
         <a href="/favorites">FAVORITES</a>
         <a href="/cars/new">ADD CAR</a>
         <a href="/auth/sign-out">SIGN OUT</a>

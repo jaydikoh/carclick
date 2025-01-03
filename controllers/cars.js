@@ -22,6 +22,17 @@ const ensureSignedIn = require('../middleware/ensure-signed-in');
 
 // All routes start with '/cars'
 
+router.get('/mycars', ensureSignedIn, async (req, res) => {
+  try {
+    const cars = await Car.find({ owner: req.user._id }); // Find cars owned by the logged-in user
+    console.log('User cars:', cars);
+    res.render('cars/mycars.ejs', { title: 'My Cars', cars });
+  } catch (e) {
+    console.log(e)
+    // res.redirect('/cars');
+  }
+});
+
 // GET /cars (index functionality) UN-PROTECTED - all users can access
 router.get('/', async (req, res) => {
   const cars = await Car.find({}).populate('owner')
@@ -93,11 +104,13 @@ router.delete('/:id', ensureSignedIn, async (req, res) => {
       
       await Car.findByIdAndDelete(req.params.id)
       res.redirect('/cars');
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.log(e);
       res.status(500).send('Error deleting car');
   }
 });
+
+
 
 
 

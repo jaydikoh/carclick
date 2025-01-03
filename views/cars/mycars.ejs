@@ -1,5 +1,6 @@
 <%- include('../partials/header.ejs') %>
 
+<% if (cars.length > 0) { %>
 <div class="car-listing">
   <% cars.forEach((car) => { %>
     <div class="car-card">
@@ -12,9 +13,12 @@
         <h3><%= car.name %> - $<%= car.price %></h3>
         <p><strong>Year:</strong> <%= car.year %></p>
         <a href="/cars/<%= car._id %>" class="view-details-button">View Details</a>
-      </div>
     </div>
   <% }) %>
+  <% } else { %>
+    <p>You have not added any cars yet. <a href="/cars/new">Add a Car</a></p>
+  <% } %>
+  
 </div>
 
 <%- include('../partials/footer.ejs')%>
