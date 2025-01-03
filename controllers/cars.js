@@ -75,10 +75,24 @@ router.get('/:id/edit', async (req, res) => {
 
 
 // PUT /cars/:id (Update functionality)
-router.put('/:id', ensureSignedIn, async(req, res) => {
+router.put('/:id', ensureSignedIn, upload.single('photo'), async(req, res) => {
   try{
     req.body.owner = req.user._id
-    await Car.findByIdAndUpdate(req.params.id, req.body);  
+    const car = await Car.findById(req.params.id);    
+    if (req.file) {
+      // Delete the old photo
+      if (car.photo) {
+        const oldPhotoPath = path.join(__dirname, '../', car.photo);
+        fs.unlink(oldPhotoPath, (err) => {
+          if (err) console.error('Error deleting old photo:', err);
+        });
+      }
+    
+      // Set the new photo path
+      car.photo = `/uploads/${req.file.filename}`;
+    }  
+    Object.assign(car, req.body);
+    await car.save();
     res.redirect('/cars');
   } catch (e) {
     console.log(e);

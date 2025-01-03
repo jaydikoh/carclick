@@ -1,16 +1,16 @@
 <%- include('../partials/header.ejs') %>
 
-<form action="/cars/<%=car._id%>?_method=PUT" method="POST">
+<form action="/cars/<%=car._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
     <label for="name">Car Model:</label>
     <input type="text" name="name" id="name" value="<%= car.name %>" />
     <label for="type">Type of Car:</label>
             <select name="type" id="type"required>
-                <option>Sedan</option>
-                <option>Coupe</option>
-                <option>Suv</option>
-                <option>Truck</option>
-                <option>Electric</option>
-                <option>Convertible</option>
+                <option value="Sedan" <%= car.type === "Sedan" ? "selected" : "" %>>Sedan</option>
+                <option value="Coupe" <%= car.type === "Coupe" ? "selected" : "" %>>Coupe</option>
+                <option value="Suv" <%= car.type === "Suv" ? "selected" : "" %>>SUV</option>
+                <option value="Truck" <%= car.type === "Truck" ? "selected" : "" %>>Truck</option>
+                <option value="Electric" <%= car.type === "Electric" ? "selected" : "" %>>Electric</option>
+                <option value="Convertible" <%= car.type === "Convertible" ? "selected" : "" %>>Convertible</option>
             </select>
     <label for="city">City:</label>
     <input type="text" name="city" id="city"  value="<%= car.city %>"  />
@@ -22,6 +22,15 @@
     <input type="number" name="phoneNumber" id="phoneNumber"  value="<%= car.phoneNumber %>" />
     <label for="email">Email:</label>
     <input type="email" name="email" id="email"  value="<%= car.email %>" />
+    <label for="photo">Current Photo:</label>
+    <% if (car.photo) { %>
+      <img src="<%= car.photo %>" alt="<%= car.name %>" style="width: 200px; height: auto; border-radius: 10px; margin-bottom: 10px;" />
+    <% } else { %>
+      <p>No photo uploaded yet.</p>
+    <% } %>
+  
+    <label for="photo">Change Photo:</label>
+    <input type="file" name="photo" id="photo" accept="image/*" />
     <button type="submit">Edit Car</button>
   </form>
 
