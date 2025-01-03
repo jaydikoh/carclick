@@ -23,7 +23,7 @@ router.post ('/cars/:id/favorites', async (req, res) => {
   try{
     await Car.findByIdAndUpdate(
       req.params.id,
-      {$addToSet: {favoritedBy: req.user._id}}
+      {$addToSet: {favoritedBy: req.user._id}},
     );
     res.redirect(`/cars/${req.params.id}`);
   } catch (e) {
@@ -37,7 +37,7 @@ router.delete('/cars/:id/favorites', async (req, res) => {
   try{
     await Car.findByIdAndUpdate(
       req.params.id,
-      {$pull: {favoritedBy: req.user._id}}
+      {$pull: {favoritedBy: req.user._id}}, 
     );
     res.redirect(`/cars/${req.params.id}`);
   } catch (e) {
@@ -49,3 +49,5 @@ router.delete('/cars/:id/favorites', async (req, res) => {
 
 
 module.exports = router;
+
+

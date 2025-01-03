@@ -48,7 +48,9 @@ router.get('/new', ensureSignedIn, (req, res) => {
 router.get('/:id', async (req, res) => {
   const car = await Car.findById(req.params.id).populate('owner');
   const isFavorited = car.favoritedBy.some((userId) => userId.equals(req.user?._id));
-  res.render('cars/show.ejs', {title: `Car in ${car.city}`, car, isFavorited})
+  req.body.owner = req.user._id;
+  owner = req.body.owner
+  res.render('cars/show.ejs', {title: `Car in ${car.city}`, car, isFavorited, owner})
 });
 
 
@@ -77,7 +79,7 @@ router.get('/:id/edit', async (req, res) => {
 // PUT /cars/:id (Update functionality)
 router.put('/:id', ensureSignedIn, upload.single('photo'), async(req, res) => {
   try{
-    req.body.owner = req.user._id
+    // req.body.owner = req.user._id
     const car = await Car.findById(req.params.id);    
     if (req.file) {
       // Delete the old photo
@@ -129,3 +131,5 @@ router.delete('/:id', ensureSignedIn, async (req, res) => {
 
 
 module.exports = router;
+
+

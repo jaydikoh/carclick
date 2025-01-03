@@ -1,3 +1,4 @@
+
 <%- include('../partials/header.ejs') %>
 
 <h2>Details</h2>
@@ -23,11 +24,16 @@
 <p>You don't own this, <%= car.owner.username %> does!</p>
     <% } %>
 
-<% if (isFavorited) { %>
-<p>This Car is favorited</p>
-<% } else if (user) { %>
-    <form action="/cars/<%= car._id %>/favorites" method="POST">
-        <button type="submit">Add to Favorites</button>
-          </form>   
-<% } %>    
+    <% if (!car.owner?._id.equals(user?._id)) { %>
+        <% if (isFavorited) { %>
+            <p>This Car is favorited</p>
+            <form action="/cars/<%= car._id %>/favorites?_method=DELETE" method="POST">
+                <button type="submit">Remove from Favorites</button>
+            </form>
+        <% } else { %>
+            <form action="/cars/<%= car._id %>/favorites" method="POST">
+                <button type="submit">Add to Favorites</button>
+            </form>
+        <% } %>
+    <% } %>
 <%- include('../partials/footer.ejs')%>
