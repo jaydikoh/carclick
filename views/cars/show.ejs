@@ -1,39 +1,57 @@
-
 <%- include('../partials/header.ejs') %>
 
-<h2>Details</h2>
-<% if (car.photo) { %>
-    <img src="<%= car.photo %>" alt="<%= car.name %>" />
-<% } else { %>
-    <p>No photo available</p>
-<% } %>
-
-<p>Car Model: <%= car.name %></p>
-<p>Year: <%= car.year %></p>
-<p>Car Type: <%= car.type %></p>
-<p>Price: $<%= car.price %></p>
-<p>Location: <%= car.city %></p>
-<p>Added on: <%= car.createdAt.toLocaleDateString() %></p>
-<h2>Owner</h2>
-<% if (car.owner?._id.equals(user?._id)) { %>
-<p>You own this!</p>
-<a href="/cars/<%= car._id %>/edit">Edit Car</a>
-<form action="/cars/<%= car._id %>?_method=DELETE" method="POST">
-    <button type="submit">Delete Car</button>
-<% } else { %>
-<p>You don't own this, <%= car.owner.username %> does!</p>
+<div class="car-details-container">
+  <!-- Left Side: Photo and Contact Details -->
+  <div class="left-section">
+    <% if (car.photo) { %>
+      <img src="<%= car.photo %>" alt="<%= car.name %>" class="car-photo" />
+    <% } else { %>
+      <div class="placeholder-photo">No Photo Available</div>
     <% } %>
 
+    <!-- Contact Details -->
+    <div class="contact-details">
+      <h2>Contact Details</h2>
+      <p><strong>Phone Number:</strong> <%= car.phoneNumber %></p>
+      <p><strong>Email:</strong> <%= car.email %></p>
+    </div>
+  </div>
+
+  <!-- Right Side: Car Details -->
+  <div class="right-section">
+    <h2>Car Details</h2>
+    <p><strong>Car Model:</strong> <%= car.name %></p>
+    <p><strong>Year:</strong> <%= car.year %></p>
+    <p><strong>Car Type:</strong> <%= car.type %></p>
+    <p><strong>Price:</strong> $<%= car.price %></p>
+    <p><strong>Location:</strong> <%= car.city %></p>
+    <p><strong>Added on:</strong> <%= car.createdAt.toLocaleDateString() %></p>
+
+    <!-- Owner Details -->
+    <% if (car.owner?._id.equals(user?._id)) { %>
+      <p>You own this car!</p>
+      <a href="/cars/<%= car._id %>/edit" class="edit-button">Edit Car</a>
+      <form action="/cars/<%= car._id %>?_method=DELETE" method="POST" class="delete-form">
+        <button type="submit" class="delete-button">Delete Car</button>
+      </form>
+    <% } else { %>
+      <p>This car is owned by <%= car.owner.username %>.</p>
+    <% } %>
+
+    <!-- Favorite Button -->
     <% if (!car.owner?._id.equals(user?._id)) { %>
-        <% if (isFavorited) { %>
-            <p>This Car is favorited</p>
-            <form action="/cars/<%= car._id %>/favorites?_method=DELETE" method="POST">
-                <button type="submit">Remove from Favorites</button>
-            </form>
-        <% } else { %>
-            <form action="/cars/<%= car._id %>/favorites" method="POST">
-                <button type="submit">Add to Favorites</button>
-            </form>
-        <% } %>
+      <% if (isFavorited) { %>
+        <p>This Car is favorited</p>
+        <form action="/cars/<%= car._id %>/favorites?_method=DELETE" method="POST">
+          <button type="submit" class="favorite-button">Remove from Favorites</button>
+        </form>
+      <% } else { %>
+        <form action="/cars/<%= car._id %>/favorites" method="POST">
+          <button type="submit" class="favorite-button">Add to Favorites</button>
+        </form>
+      <% } %>
     <% } %>
-<%- include('../partials/footer.ejs')%>
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

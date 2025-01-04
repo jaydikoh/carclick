@@ -8,7 +8,11 @@
   </head>
   <body>
     <nav>
-      <a href="/">HOME</a>
+        <div id="logo-container">
+            <a href="/">
+            <img src="../images/carclick-logo.png" alt="CarClick Logo" id="logo">
+          </a>
+          </div>
       <div>
           <!-- Above renders whether signed in or not -->
           <% if (user) { %>
@@ -26,13 +30,16 @@
     <main>
 
     <section class="container1">
-        <div class="section">
+        <div class="section " id="logo-msg">
+          <img src="../images/carclick-logo.png" alt="CarClick Logo" id="container-logo">
+        <div>
           <h1>Welcome to CarClick</h1>
           <p>The ultimate platform for buying and selling cars! Whether you're looking to upload your car for sale or find the perfect vehicle, we've got you covered.</p>
         </div>
+      </div>
     
         <div class="section">
-          <img src="https://i.imgur.com/EoJCh0x.jpeg" alt="Cars for Sale" style="width:100%; height:auto;">
+          <img src="https://i.imgur.com/EoJCh0x.jpeg" alt="Cars for Sale" style="width:100%; height:auto;" id="homecar">
           <p>Your gateway to showcasing cars to thousands of potential buyers!</p>
           <a href="/cars" class="cta-button">Explore Cars</a>
           </div>

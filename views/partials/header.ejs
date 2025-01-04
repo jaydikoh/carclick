@@ -8,21 +8,25 @@
   </head>
   <body>
     <nav>
-      <a href="/">HOME</a>
-      <div>
+      <div id="logo-container">
+          <a href="/">
+          <img src="../images/carclick-logo.png" alt="CarClick Logo" id="logo">
+        </a>
+        </div>
+    <div>
         <!-- Above renders whether signed in or not -->
         <% if (user) { %>
-        <a href="/cars/mycars">MY CARS</a>
-        <a href="/favorites">FAVORITES</a>
-        <a href="/cars/new">ADD CAR</a>
-        <a href="/auth/sign-out">SIGN OUT</a>
-        <span><%= user.username %></span>
-        <% } else { %>
-        <a href="/auth/sign-up">SIGN UP</a>
-        <a href="/auth/sign-in">SIGN IN</a>
-        <% } %>
-      </div>
-    </nav>
+      <a href="/cars/mycars">MY CARS</a>
+      <a href="/favorites">FAVORITES</a>
+      <a href="/cars/new">ADD CAR</a>
+      <a href="/auth/sign-out">SIGN OUT</a>
+      <span><%= user.username %></span>
+      <% } else { %>
+      <a href="/auth/sign-up">SIGN UP</a>
+      <a href="/auth/sign-in">SIGN IN</a>
+      <% } %>
+    </div>
+  </nav>
     <main>
       <h1><%= title %></h1>
 
