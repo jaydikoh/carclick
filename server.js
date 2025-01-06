@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const session = require('express-session');
+const {uploadFile} = require("./s3")
 
 const app = express();
 

@@ -2,35 +2,33 @@ const express = require('express');
 const router = express.Router();
 const Car = require('../models/car');
 const multer = require('multer');
+
 const path = require('path');
-const fs = require('fs');
+// const fs = require('fs');
+const { uploadFile, deleteFile } = require('../s3'); // S3 utility functions
 
+const upload = multer({dest: "uploads/"})
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-      cb(null, 'uploads/'); // Save files to the 'uploads' directory
-  },
-  filename: (req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`); // Add timestamp to file name
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//       cb(null, 'uploads/'); // Save files to the 'uploads' directory
+//   },
+//   filename: (req, file, cb) => {
+//       cb(null, `${Date.now()}-${file.originalname}`); // Add timestamp to file name
+//   }
+// });
 
-const upload = multer({ storage });
+// const upload = multer({ storage });
 
 // Middleware to protect selected routes
 const ensureSignedIn = require('../middleware/ensure-signed-in');
 
 // All routes start with '/cars'
 
+// GET /cars/mycars
 router.get('/mycars', ensureSignedIn, async (req, res) => {
-  try {
     const cars = await Car.find({ owner: req.user._id }); // Find cars owned by the logged-in user
-    console.log('User cars:', cars);
     res.render('cars/mycars.ejs', { title: 'My Cars', cars });
-  } catch (e) {
-    console.log(e)
-    // res.redirect('/cars');
-  }
 });
 
 // GET /cars (index functionality) UN-PROTECTED - all users can access
@@ -48,7 +46,7 @@ router.get('/new', ensureSignedIn, (req, res) => {
 router.get('/:id', async (req, res) => {
   const car = await Car.findById(req.params.id).populate('owner');
   const isFavorited = car.favoritedBy.some((userId) => userId.equals(req.user?._id));
-  req.body.owner = req.user._id;
+  // req.body.owner = req.user._id;
   owner = req.body.owner
   res.render('cars/show.ejs', {title: `Car in ${car.city}`, car, isFavorited, owner})
 });
@@ -59,9 +57,10 @@ router.post('/', ensureSignedIn, upload.single('photo'), async (req, res) => {
   try{
     req.body.owner = req.user._id;
     if (req.file) {
-      req.body.photo = `/uploads/${req.file.filename}`; // Store file path in photo field
-  }
-    const car = await Car.create(req.body);
+      const result = await uploadFile(req.file);
+      req.body.photo = result.Location;
+    }
+    await Car.create(req.body);
     res.redirect('/cars');
   } catch (e) {
     console.log(e);
@@ -84,15 +83,13 @@ router.put('/:id', ensureSignedIn, upload.single('photo'), async(req, res) => {
     if (req.file) {
       // Delete the old photo
       if (car.photo) {
-        const oldPhotoPath = path.join(__dirname, '../', car.photo);
-        fs.unlink(oldPhotoPath, (err) => {
-          if (err) console.error('Error deleting old photo:', err);
-        });
+        const key = car.photo.split('/').slice(-1)[0]; // Extract the file name from the S3 URL
+        await deleteFile(key);
       }
-    
-      // Set the new photo path
-      car.photo = `/uploads/${req.file.filename}`;
-    }  
+      // Upload the new photo to S3
+      const result = await uploadFile(req.file);
+      car.photo = result.Location;
+    }
     Object.assign(car, req.body);
     await car.save();
     res.redirect('/cars');
@@ -108,15 +105,9 @@ router.delete('/:id', ensureSignedIn, async (req, res) => {
     const car = await Car.findById(req.params.id);
 
     if (car.photo) {
-      const filePath = path.join(__dirname, '../', car.photo); // Adjust the path as necessary
-      fs.unlink(filePath, (err) => {
-          if (err) {
-              console.error('Error deleting photo:', err);
-          } else {
-              console.log('Photo deleted successfully');
-          }
-      });
-  }
+      const key = car.photo.split('/').slice(-1)[0];
+      await deleteFile(key);
+    }
       
       await Car.findByIdAndDelete(req.params.id)
       res.redirect('/cars');
@@ -131,5 +122,3 @@ router.delete('/:id', ensureSignedIn, async (req, res) => {
 
 
 module.exports = router;
-
-

@@ -4,7 +4,8 @@
   <% cars.forEach((car) => { %>
     <div class="car-card">
       <% if (car.photo) { %>
-        <img src="<%= car.photo %>" alt="<%= car.name %>" class="car-photo" style="width: 100%; height: 220px; object-fit: cover; border-radius: 10px;" />      <% } else { %>
+        <img src="<%= car.photo %>" alt="<%= car.name %>" class="car-photo" style="width: 100%; height: 220px; object-fit: cover; border-radius: 10px;" />      
+        <% } else { %>
         <div class="placeholder-photo">No Photo Available</div>
       <% } %>
       <div class="car-details">

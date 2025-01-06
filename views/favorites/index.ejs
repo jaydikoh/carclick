@@ -1,17 +1,23 @@
 <%- include('../partials/header.ejs') %>
 
-<ul>
+<div class="car-listing">
   <% cars.forEach((car) => { %>
-  <li>
-    <a href="/cars/<%= car._id %>">
-        A Car in <%= car.city %> owned by <%= car.owner.username
-      %>.</a>
-      <form action="/cars/<%= car._id %>/favorites?_method=DELETE" method="POST">
-        <button type="submit">Remove from Favorites</button>
-          </form>
-  </li>
-  
+    <div class="car-card">
+      <% if (car.photo) { %>
+        <img src="<%= car.photo %>" alt="<%= car.name %>" class="car-photo" style="width: 100%; height: 220px; object-fit: cover; border-radius: 10px;" />
+      <% } else { %>
+        <div class="placeholder-photo">No Photo Available</div>
+      <% } %>
+      <div class="car-details">
+        <h3><%= car.name %> - $<%= car.price %></h3>
+        <p><strong>Year:</strong> <%= car.year %></p>
+        <a href="/cars/<%= car._id %>" class="view-details-button">View Details</a>
+        <form action="/cars/<%= car._id %>/favorites?_method=DELETE" method="POST" class="delete-form">
+          <button type="submit" class="remove-favorite-button">Remove from Favorites</button>
+        </form>
+      </div>
+    </div>
   <% }) %>
-</ul>
+</div>
 
 <%- include('../partials/footer.ejs')%>
