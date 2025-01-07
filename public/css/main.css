@@ -8,7 +8,8 @@ body {
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background-color: black;
+  background: url('../images/front-view-dark-silhouette-of-a-modern-sport-red-car-isolated-on-dark-background-with-red-neon-light-and-smoke-ai-generated-free-photo.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: aliceblue;
 }
 
@@ -148,7 +149,7 @@ nav span {
 .features {
   text-align: center;
   padding: 3rem 10%;
-  background: #0b0d0d;
+  /* background: #0b0d0d; */
 }
 
 .features h2 {
@@ -431,6 +432,34 @@ button:hover {
   }
 }
 
+/* Search Form Styling */
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
 
+.search-form input {
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.search-form button {
+  padding: 10px 15px;
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #003f7f;
+}
 
 

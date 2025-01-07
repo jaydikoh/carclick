@@ -1,5 +1,12 @@
 <%- include('../partials/header.ejs') %>
 
+<!-- Search Form -->
+<form action="/cars/search" method="GET" class="search-form">
+  <input type="text" name="query" placeholder="Search for cars..." required>
+  <button type="submit">Search</button>
+</form>
+
+
 <div class="car-listing">
   <% cars.forEach((car) => { %>
     <div class="car-card">

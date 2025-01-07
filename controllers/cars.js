@@ -42,6 +42,28 @@ router.get('/new', ensureSignedIn, (req, res) => {
   res.render('cars/new.ejs', {title: 'Add Cars'});
 });
 
+// Search Route
+router.get('/search', async (req, res) => {
+  try {
+    const searchTerm = req.query.query;
+
+    // Search by car name, type, or city (case-insensitive)
+    const cars = await Car.find({
+      $or: [
+        { name: { $regex: searchTerm, $options: 'i' } },
+        { type: { $regex: searchTerm, $options: 'i' } },
+        { city: { $regex: searchTerm, $options: 'i' } }
+      ]
+    }).populate('owner');
+
+    res.render('cars/index.ejs', { title: 'Search Results', cars });
+  } catch (e) {
+    console.error(e);
+    res.redirect('/cars');
+  }
+});
+
+
 // GET /cars/:id (show funtionality)
 router.get('/:id', async (req, res) => {
   const car = await Car.findById(req.params.id).populate('owner');
@@ -117,7 +139,26 @@ router.delete('/:id', ensureSignedIn, async (req, res) => {
   }
 });
 
+// Search Route
+router.get('/search', async (req, res) => {
+  try {
+    const searchTerm = req.query.query;
 
+    // Search by car name, type, or city (case-insensitive)
+    const cars = await Car.find({
+      $or: [
+        { name: { $regex: searchTerm, $options: 'i' } },
+        { type: { $regex: searchTerm, $options: 'i' } },
+        { city: { $regex: searchTerm, $options: 'i' } }
+      ]
+    }).populate('owner');
+
+    res.render('cars/index.ejs', { title: 'Search Results', cars });
+  } catch (e) {
+    console.error(e);
+    res.redirect('/cars');
+  }
+});
 
 
 
