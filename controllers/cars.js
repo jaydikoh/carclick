@@ -34,12 +34,12 @@ router.get('/mycars', ensureSignedIn, async (req, res) => {
 // GET /cars (index functionality) UN-PROTECTED - all users can access
 router.get('/', async (req, res) => {
   const cars = await Car.find({}).populate('owner')
-  res.render('cars/index.ejs', {title: 'All Cars', cars, message: null});
+  res.render('cars/index.ejs', {title: 'All Available Cars', cars, message: null});
 });
 
 // GET /cars/new (new functionality) PROTECTED - only signed in users can access
 router.get('/new', ensureSignedIn, (req, res) => {
-  res.render('cars/new.ejs', {title: 'Add Cars'});
+  res.render('cars/new.ejs', {title: 'Add a New Car'});
 });
 
 // Search Route
@@ -73,7 +73,7 @@ router.get('/:id', async (req, res) => {
   const isFavorited = car.favoritedBy.some((userId) => userId.equals(req.user?._id));
   // req.body.owner = req.user._id;
   owner = req.body.owner
-  res.render('cars/show.ejs', {title: `Car in ${car.city}`, car, isFavorited, owner})
+  res.render('cars/show.ejs', {title: `${car.model} in ${car.city}`, car, isFavorited, owner})
 });
 
 
