@@ -1,6 +1,6 @@
 <%- include('../partials/header.ejs') %>
 
-
+<% if (cars.length > 0) { %>
 <div class="car-listing">
   <% cars.forEach((car) => { %>
     <div class="car-card">
@@ -20,5 +20,8 @@
     </div>
   <% }) %>
 </div>
+<% } else { %>
+  <p>You have not added any cars yet. <a href="/cars">Explore Cars</a></p>
+<% } %>
 
 <%- include('../partials/footer.ejs')%>
