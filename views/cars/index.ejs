@@ -6,7 +6,9 @@
   <button type="submit">Search</button>
 </form>
 
-
+<% if (message) { %>
+  <p class="no-results-message"><%= message %></p>
+<% } else { %>
 <div class="car-listing">
   <% cars.forEach((car) => { %>
     <div class="car-card">
@@ -23,5 +25,7 @@
     </div>
   <% }) %>
 </div>
+<% } %>
+
 
 <%- include('../partials/footer.ejs')%>

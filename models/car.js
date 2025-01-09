@@ -6,6 +6,10 @@ const carSchema = new Schema({
       type: String,
       required: true,
     },
+    model: {
+      type: String,
+      required: true,
+    },
     price: {
       type: Number,
       required: true,
@@ -19,6 +23,15 @@ const carSchema = new Schema({
       type: Number,
       required: true,
       max: new Date().getFullYear(),
+    },
+    miles: {
+      type: Number,
+      required: true, 
+    },
+    condition: {
+      type: String,
+      enum: ['New', 'Used'], 
+      required: true,
     },
     photo: {
       type: String,

@@ -18,7 +18,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2vmin;
+  padding: 1.5vmin;
   font-size: 2vh;
   color: lightslategray;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -71,7 +71,7 @@ nav span {
 #logo-msg {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   width: 100%; /* This ensures it takes 65% of the container */
 }
 
@@ -179,7 +179,7 @@ nav span {
 }
 
 .about {
-  padding: 3rem 10%;
+  padding: 1rem 10%;
   background: rgb(40, 40, 40);
 }
 
@@ -187,6 +187,11 @@ nav span {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
+
+.about p {
+  width: 40%;
+}
+
 
 footer {
   background: #1b2735;
@@ -209,6 +214,7 @@ form {
   display: grid;
   grid-template-columns: auto auto;
   gap: 2vmin;
+  /* background-color: black; */
 }
 
 form * {
@@ -450,7 +456,7 @@ button:hover {
 
 .search-form button {
   padding: 10px 15px;
-  background-color: #0056b3;
+  background-color: #0a335f;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -462,4 +468,60 @@ button:hover {
   background-color: #003f7f;
 }
 
+/* Custom Background for New Car Page */
+.new-car-page {
+  /* background-image: url('../images/front-view-dark-silhouette-of-a-modern-sport-red-car-isolated-on-dark-background-with-red-neon-light-and-smoke-ai-generated-free-photo.jpg'); */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  color: #ffffff;
+}
 
+.new-car-page main {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 50px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.new-car-page form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.new-car-page form input,
+.new-car-page form select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.new-car-page button {
+  background-color: #082849;
+  color: #fff;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.new-car-page button:hover {
+  background-color: #003f7f;
+}
+
+.no-results-message {
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
+  font-size: 1.5rem;
+  color: white;
+  text-align: center;
+  margin: 20px 0;
+}

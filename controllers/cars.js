@@ -34,7 +34,7 @@ router.get('/mycars', ensureSignedIn, async (req, res) => {
 // GET /cars (index functionality) UN-PROTECTED - all users can access
 router.get('/', async (req, res) => {
   const cars = await Car.find({}).populate('owner')
-  res.render('cars/index.ejs', {title: 'All Cars', cars});
+  res.render('cars/index.ejs', {title: 'All Cars', cars, message: null});
 });
 
 // GET /cars/new (new functionality) PROTECTED - only signed in users can access
@@ -51,14 +51,17 @@ router.get('/search', async (req, res) => {
     const cars = await Car.find({
       $or: [
         { name: { $regex: searchTerm, $options: 'i' } },
+        { model: { $regex: searchTerm, $options: 'i' } },
         { type: { $regex: searchTerm, $options: 'i' } },
         { city: { $regex: searchTerm, $options: 'i' } }
       ]
     }).populate('owner');
 
-    res.render('cars/index.ejs', { title: 'Search Results', cars });
+    const message = cars.length === 0 ? "No cars found matching your search." : null;
+
+    res.render('cars/index.ejs', { title: 'Search Results', cars, message });
   } catch (e) {
-    console.error(e);
+    console.log(e);
     res.redirect('/cars');
   }
 });
@@ -139,26 +142,6 @@ router.delete('/:id', ensureSignedIn, async (req, res) => {
   }
 });
 
-// Search Route
-router.get('/search', async (req, res) => {
-  try {
-    const searchTerm = req.query.query;
-
-    // Search by car name, type, or city (case-insensitive)
-    const cars = await Car.find({
-      $or: [
-        { name: { $regex: searchTerm, $options: 'i' } },
-        { type: { $regex: searchTerm, $options: 'i' } },
-        { city: { $regex: searchTerm, $options: 'i' } }
-      ]
-    }).populate('owner');
-
-    res.render('cars/index.ejs', { title: 'Search Results', cars });
-  } catch (e) {
-    console.error(e);
-    res.redirect('/cars');
-  }
-});
 
 
 

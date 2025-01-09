@@ -20,10 +20,13 @@
   <!-- Right Side: Car Details -->
   <div class="right-section">
     <h2>Car Details</h2>
-    <p><strong>Car Model:</strong> <%= car.name %></p>
+    <p><strong>Car Make:</strong> <%= car.name %></p>
+    <p><strong>Model:</strong> <%= car.model %></p>
     <p><strong>Year:</strong> <%= car.year %></p>
     <p><strong>Car Type:</strong> <%= car.type %></p>
     <p><strong>Price:</strong> $<%= car.price %></p>
+    <p><strong>Condition:</strong> <%= car.condition %></p>
+    <p><strong>Miles:</strong> <%= car.miles %> miles</p>
     <p><strong>Location:</strong> <%= car.city %></p>
     <p><strong>Added on:</strong> <%= car.createdAt.toLocaleDateString() %></p>
 

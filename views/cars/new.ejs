@@ -1,8 +1,10 @@
 <%- include('../partials/header.ejs') %>
-
+<body class="new-car-page">
 <form action="/cars" method="POST" enctype="multipart/form-data">
-    <label for="name">Car Model:</label>
+    <label for="name">Car Make:</label>
     <input type="text" name="name" id="name" />
+    <label for="model">Car Model:</label>
+  <input type="text" name="model" id="model" required />
     <label for="type">Type of Car:</label>
             <select name="type" id="type"required>
                 <option>Sedan</option>
@@ -18,6 +20,13 @@
     <input type="number" name="price" id="price" min="0" />
     <label for="year">Year:</label>
     <input type="number" name="year" id="year" min="1950" max="2024" maxlength="4" required>
+    <label for="condition">Condition:</label>
+  <select name="condition" id="condition" required>
+    <option value="New">New</option>
+    <option value="Used">Pre-owned</option>
+  </select>
+  <label for="miles">Miles:</label>
+  <input type="number" name="miles" id="miles" min="0" required />
     <label for="phoneNumber">Phone Number:</label>
     <input type="number" name="phoneNumber" id="phoneNumber" />
     <label for="email">Email:</label>
@@ -26,5 +35,5 @@
     <input type="file" name="photo" id="photo" accept="image/*" />
     <button type="submit">Add Car</button>
   </form>
-
+</body>
 <%- include('../partials/footer.ejs') %>

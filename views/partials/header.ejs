@@ -6,7 +6,6 @@
     <title>CarClick</title>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
-
   </head>
   <body>
     <nav>
@@ -18,6 +17,7 @@
     <div>
         <!-- Above renders whether signed in or not -->
         <% if (user) { %>
+      <a href="/cars">EXPLORE CARS</a>
       <a href="/cars/mycars">MY CARS</a>
       <a href="/favorites">FAVORITES</a>
       <a href="/cars/new">ADD CAR</a>
