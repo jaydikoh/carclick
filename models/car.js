@@ -30,7 +30,7 @@ const carSchema = new Schema({
     },
     condition: {
       type: String,
-      enum: ['New', 'Used'], 
+      enum: ['New', 'Pre-owned'], 
       required: true,
     },
     photo: {

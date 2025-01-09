@@ -34,7 +34,7 @@
     <% if (car.owner?._id.equals(user?._id)) { %>
       <p>You own this car!</p>
       <a href="/cars/<%= car._id %>/edit" class="edit-button">Edit Car</a>
-      <form action="/cars/<%= car._id %>?_method=DELETE" method="POST" class="delete-form">
+      <form action="/cars/<%= car._id %>?_method=DELETE" method="POST" class="delete-form" onsubmit="return confirmDelete()">
         <button type="submit" class="delete-button">Delete Car</button>
       </form>
     <% } else { %>
@@ -56,5 +56,10 @@
     <% } %>
   </div>
 </div>
+<script>
+  function confirmDelete() {
+    return confirm('Are you sure you want to delete this car? This action cannot be undone.');
+  }
+</script>
 
 <%- include('../partials/footer.ejs') %>

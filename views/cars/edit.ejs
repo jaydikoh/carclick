@@ -25,7 +25,7 @@
     <label for="condition">Condition:</label>
   <select name="condition" id="condition" required>
     <option value="New" <%= car.condition === 'New' ? 'selected' : '' %>>Brand New</option>
-    <option value="Used" <%= car.condition === 'Used' ? 'selected' : '' %>>Pre-owned</option>
+    <option value="Pre-owned" <%= car.condition === 'Pre-owned' ? 'selected' : '' %>>Pre-owned</option>
   </select>
   <label for="miles">Miles:</label>
   <input type="number" name="miles" id="miles" min="0" value="<%= car.miles %>" required />
