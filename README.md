@@ -7,7 +7,7 @@
   ***CarClick*** is a modern, interactive platform designed to make buying and selling cars easy and efficient. Whether you’re looking to showcase your car to thousands of potential buyers or searching for your next ride, CarClick has you covered. With a sleek user interface, advanced search functionality, and interactive features, CarClick bridges the gap between car sellers and buyers with simplicity and style.
 
   ## Screenshot
-  ![Screenshot 1](https://i.imgur.com/drOoiLn.png"screenshot")
+  ![Screenshot 1](https://i.imgur.com/drOoiLn.png "screenshot")
 
   ![Screenshot 2](https://i.imgur.com/dRI2g1N.png "screenshot")
 
@@ -53,7 +53,7 @@
 - **Responsive Design**: Works smoothly on both desktop and mobile.
 
 
-### Explore Live here: [CarClick](https://carclick-86806fe8a573.herokuapp.com/auth/sign-in)
+### Explore Live here: [CarClick](https://carclick-86806fe8a573.herokuapp.com/)
 
 
 ### ***Credits***
