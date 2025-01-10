@@ -28,7 +28,6 @@ nav {
 nav a {
   text-decoration: none;
   color: slategray;
-  /* background-color: rgb(210, 200, 200); */
   padding: 1vmin;
   border-radius: 1vmin;
   
@@ -39,21 +38,6 @@ nav a {
     color: white;
   }
 }
-
-/* #logo-container a {
-  padding: 0;
-  margin: 0;
-  background: none;
-  display: flex;
-}
-
-#logo {
-  height: 40px;
-  width: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* display: inline-block; 
-} */
 
 /* Logo Container Styling */
 #logo-container {
@@ -78,7 +62,7 @@ nav a {
 
 .app-name {
   font-family: 'Pacifico', cursive;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #39679e;
   letter-spacing: 1px;
   margin-left: 8px;
@@ -194,7 +178,6 @@ nav span {
 .features {
   text-align: center;
   padding: 3rem 10%;
-  /* background: #0b0d0d; */
 }
 
 .features h2 {
@@ -259,7 +242,6 @@ form {
   display: grid;
   grid-template-columns: auto auto;
   gap: 2vmin;
-  /* background-color: black; */
 }
 
 form * {
@@ -515,7 +497,6 @@ button:hover {
 
 /* Custom Background for New Car Page */
 .new-car-page {
-  /* background-image: url('../images/front-view-dark-silhouette-of-a-modern-sport-red-car-isolated-on-dark-background-with-red-neon-light-and-smoke-ai-generated-free-photo.jpg'); */
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -523,6 +504,8 @@ button:hover {
 }
 
 .new-car-page main {
+  display: flex;
+  flex-direction: column;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 2rem;
   border-radius: 10px;
@@ -564,7 +547,6 @@ button:hover {
 .no-results-message {
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-
   font-size: 1.5rem;
   color: white;
   text-align: center;
@@ -579,8 +561,6 @@ button:hover {
   text-align: center;
   font-weight: bold;
   margin-top: 20px;
-  /* letter-spacing: 2px; */
   background: linear-gradient(to right, #0056b3, #21354a);
-  -webkit-background-clip: text;
-  /* -webkit-text-fill-color: transparent; */
+  -webkit-background-clip: text; 
 }

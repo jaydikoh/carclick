@@ -4,9 +4,9 @@
   <!-- Left Side: Photo and Contact Details -->
   <div class="left-section">
     <% if (car.photo) { %>
-      <img src="<%= car.photo %>" alt="<%= car.name %>" class="car-photo" />
+    <img src="<%= car.photo %>" alt="<%= car.name %>" class="car-photo" />
     <% } else { %>
-      <div class="placeholder-photo">No Photo Available</div>
+    <div class="placeholder-photo">No Photo Available</div>
     <% } %>
 
     <!-- Contact Details -->
@@ -32,33 +32,40 @@
 
     <!-- Owner Details -->
     <% if (car.owner?._id.equals(user?._id)) { %>
-      <p>You own this car!</p>
-      <a href="/cars/<%= car._id %>/edit" class="edit-button">Edit Car</a>
-      <form action="/cars/<%= car._id %>?_method=DELETE" method="POST" class="delete-form" onsubmit="return confirmDelete()">
-        <button type="submit" class="delete-button">Delete Car</button>
-      </form>
+    <p>You own this car!</p>
+    <a href="/cars/<%= car._id %>/edit" class="edit-button">Edit Car</a>
+    <form
+      action="/cars/<%= car._id %>?_method=DELETE"
+      method="POST"
+      class="delete-form"
+      onsubmit="return confirmDelete()"
+    >
+      <button type="submit" class="delete-button">Delete Car</button>
+    </form>
     <% } else { %>
-      <p>This car is owned by <%= car.owner.username %>.</p>
+    <p>This car is owned by <%= car.owner.username %>.</p>
     <% } %>
 
     <!-- Favorite Button -->
-    <% if (!car.owner?._id.equals(user?._id)) { %>
-      <% if (isFavorited) { %>
-        <p>This Car is favorited</p>
-        <form action="/cars/<%= car._id %>/favorites?_method=DELETE" method="POST">
-          <button type="submit" class="favorite-button">Remove from Favorites</button>
-        </form>
-      <% } else { %>
-        <form action="/cars/<%= car._id %>/favorites" method="POST">
-          <button type="submit" class="favorite-button">Add to Favorites</button>
-        </form>
-      <% } %>
-    <% } %>
+    <% if (!car.owner?._id.equals(user?._id)) { %> <% if (isFavorited) { %>
+    <p>This Car is favorited</p>
+    <form action="/cars/<%= car._id %>/favorites?_method=DELETE" method="POST">
+      <button type="submit" class="favorite-button">
+        Remove from Favorites
+      </button>
+    </form>
+    <% } else { %>
+    <form action="/cars/<%= car._id %>/favorites" method="POST">
+      <button type="submit" class="favorite-button">Add to Favorites</button>
+    </form>
+    <% } %> <% } %>
   </div>
 </div>
 <script>
   function confirmDelete() {
-    return confirm('Are you sure you want to delete this car? This action cannot be undone.');
+    return confirm(
+      "Are you sure you want to delete this car? This action cannot be undone."
+    );
   }
 </script>
 

@@ -6,31 +6,34 @@
     <title>CarClick</title>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <nav>
       <div id="logo-container">
-          <a href="/">
-          <img src="/images/carclick-logo.png" alt="CarClick Logo" id="logo">
+        <a href="/">
+          <img src="/images/carclick-logo.png" alt="CarClick Logo" id="logo" />
           <span class="app-name">CarClick</span>
         </a>
-        </div>
-    <div>
+      </div>
+      <div>
         <!-- Above renders whether signed in or not -->
         <% if (user) { %>
-      <a href="/cars">EXPLORE CARS</a>
-      <a href="/cars/mycars">MY CARS</a>
-      <a href="/favorites">FAVORITES</a>
-      <a href="/cars/new">ADD CAR</a>
-      <a href="/auth/sign-out">SIGN OUT</a>
-      <span><%= user.username %></span>
-      <% } else { %>
-      <a href="/auth/sign-up">SIGN UP</a>
-      <a href="/auth/sign-in">SIGN IN</a>
-      <% } %>
-    </div>
-  </nav>
+        <a href="/cars">EXPLORE CARS</a>
+        <a href="/cars/mycars">MY CARS</a>
+        <a href="/favorites">FAVORITES</a>
+        <a href="/cars/new">ADD CAR</a>
+        <a href="/auth/sign-out">SIGN OUT</a>
+        <span><%= user.username %></span>
+        <% } else { %>
+        <a href="/auth/sign-up">SIGN UP</a>
+        <a href="/auth/sign-in">SIGN IN</a>
+        <% } %>
+      </div>
+    </nav>
     <main>
       <h1 class="page-title"><%= title %></h1>
-
+  
