@@ -1,5 +1,5 @@
 <%- include('../partials/header.ejs') %>
-<body class="new-car-page">
+<section class="new-car-page">
 <form action="/cars" method="POST" enctype="multipart/form-data">
     <label for="name">Car Make:</label>
     <input type="text" name="name" id="name" />
@@ -35,5 +35,5 @@
     <input type="file" name="photo" id="photo" accept="image/*" />
     <button type="submit">Add Car</button>
   </form>
-</body>
+</section>
 <%- include('../partials/footer.ejs') %>

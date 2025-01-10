@@ -49,7 +49,7 @@ router.get('/search', async (req, res) => {
 
     // Search by car name, type, or city (case-insensitive)
     const cars = await Car.find({
-      $or: [
+      $or: [                                                       //comparison operator   $ is the syntax used 
         { name: { $regex: searchTerm, $options: 'i' } },
         { model: { $regex: searchTerm, $options: 'i' } },
         { type: { $regex: searchTerm, $options: 'i' } },
@@ -68,7 +68,7 @@ router.get('/search', async (req, res) => {
 
 
 // GET /cars/:id (show funtionality)
-router.get('/:id', async (req, res) => {
+router.get('/:id', ensureSignedIn, async (req, res) => {
   const car = await Car.findById(req.params.id).populate('owner');
   const isFavorited = car.favoritedBy.some((userId) => userId.equals(req.user?._id));
   // req.body.owner = req.user._id;
@@ -84,6 +84,8 @@ router.post('/', ensureSignedIn, upload.single('photo'), async (req, res) => {
     if (req.file) {
       const result = await uploadFile(req.file);
       req.body.photo = result.Location;
+      req.body.photokey = result.Key;
+      console.log(result)
     }
     await Car.create(req.body);
     res.redirect('/cars');
@@ -107,13 +109,14 @@ router.put('/:id', ensureSignedIn, upload.single('photo'), async(req, res) => {
     const car = await Car.findById(req.params.id);    
     if (req.file) {
       // Delete the old photo
-      if (car.photo) {
-        const key = car.photo.split('/').slice(-1)[0]; // Extract the file name from the S3 URL
-        await deleteFile(key);
+      if (car.photokey) {
+        // const key = car.photo; // Extract the file name(key) from the S3 URL  
+        await deleteFile(car.photokey);
       }
       // Upload the new photo to S3
       const result = await uploadFile(req.file);
       car.photo = result.Location;
+      car.photokey = result.Key;
     }
     Object.assign(car, req.body);
     await car.save();
@@ -129,9 +132,9 @@ router.delete('/:id', ensureSignedIn, async (req, res) => {
   try {
     const car = await Car.findById(req.params.id);
 
-    if (car.photo) {
-      const key = car.photo.split('/').slice(-1)[0];
-      await deleteFile(key);
+    if (car.photokey) {
+      // const key = car.photo.split('/').slice(-1)[0];
+      await deleteFile(car.photokey);
     }
       
       await Car.findByIdAndDelete(req.params.id)

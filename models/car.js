@@ -37,6 +37,10 @@ const carSchema = new Schema({
       type: String,
       required: true
     },
+    photokey: {
+      type: String,
+      required: true
+    },
     city: {
         type: String,
         required: true,
